@@ -1,6 +1,6 @@
 # Examples Guide
 
-This is a guide to the __FhirProto Examples__ in this repository.  For instructions on setting up a working environment, see [README.md](https://github.com/google/fhir-examples/blob/master/README.md).
+This is a guide to the __FhirProto Examples__ in this repository.  For instructions on setting up a working environment, see [README.md](README.md).
 
 ## C++
 ### Example 1: Parsing and Printing
@@ -59,7 +59,7 @@ extension {
   }
 }
 ```
-Because the US Core Patient proto contains this as a profiled field, the conversion process will convert this into the [PatientUSCoreRaceExtension](https://github.com/google/fhir/blob/master/proto/r4/uscore.proto#L5126)
+Because the US Core Patient proto contains this as a profiled field, the conversion process will convert this into the [PatientUSCoreRaceExtension](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/uscore.proto#L5148)
 ```
 race {
   omb_category {
@@ -83,10 +83,10 @@ This is due to a bug in Synthea - it gives some patients the omb category code "
 
 
 ## Example 3: Custom Profile Generation
-In this example, [profile_patients_to_custom_profile.cc](https://github.com/google/fhir-examples/blob/master/cc/profile_patients_to_custom_profile.cc), we will generate our own Extensions and Profiles - imagine it to be the world's smallest Implementation Guide.  There are three config files in [//proto/myprofile]() that define our new profiles:
-* [`package_info.prototxt`](https://github.com/google/fhir-examples/blob/master/proto/myprofile/package_info.prototxt) is a [PackageConfig](https://github.com/google/fhir/blob/master/proto/profile_config.proto#L14) that defines some package-wide metadata.
-* [`extensions.prototxt`](https://github.com/google/fhir-examples/blob/master/proto/myprofile/extensions.prototxt) is a [Extensions](https://github.com/google/fhir/blob/master/proto/profile_config.proto#L80) proto that defines two new extensions: one simple and one complex.
-* [`profiles.prototxt`](https://github.com/google/fhir-examples/blob/master/proto/myprofile/profiles.prototxt)is a [Profiles](https://github.com/google/fhir/blob/master/proto/profile_config.proto#L76) proto that defines a profile for DemoPatient.  This extends from USCore patient, adds several new extension fields, and a slice onto the `CodeableConcept` at `Patient.maritalStatus`.
+In this example, [profile_patients_to_custom_profile.cc](cc/google/fhir_examples/profile_patients_to_custom_profile.cc), we will generate our own Extensions and Profiles - imagine it to be the world's smallest Implementation Guide.  There are three config files in [//proto/myprofile](proto/google/fhir_examples/myprofile/) that define our new profiles:
+* [`package_info.prototxt`](proto/google/fhir_examples/myprofile/package_info.prototxt) is a [PackageConfig](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/profile_config.proto) that defines some package-wide metadata.
+* [`extensions.prototxt`](proto/google/fhir_examples/myprofile/extensions.prototxt) is a [Extensions](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/profile_config.proto#L116) proto that defines two new extensions: one simple and one complex.
+* [`profiles.prototxt`](proto/google/fhir_examples/myprofile/profiles.prototxt)is a [Profiles](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/profile_config.proto#L110) proto that defines a profile for DemoPatient.  This extends from USCore patient, adds several new extension fields, and a slice onto the `CodeableConcept` at `Patient.maritalStatus`.
 
 In the `BUILD`file in that directory, there is a `gen_fhir_definitions_and_protos` named `myprofile`.  This will be the target of our generation script.  To generate the JSON Structure Definitions and FhirProtos, run:
 ```
@@ -98,7 +98,7 @@ This will generate 3 files:
 * `myprofile.proto` containing the newly-created FhirProtos.
 
 DemoPatient adds three new extension fields on top of the US-Core extension fields:
-* `birth_place`, defined by the Core FHIR [Birth Place](http://hl7.org/fhir/StructureDefinition/patient-birthPlace) extension, is inlined as an `Address` field.
+* `birth_place`, defined by the Core FHIR [Birth Place](https://build.fhir.org/ig/HL7/fhir-extensions/branches/master/StructureDefinition-patient-birthPlace-definitions.html) extension, is inlined as an `Address` field.
 * `likes_pie`is a boolean extension defined  in `myprofile_extensions.json` as generated from `extensions.prototxt`
 * `favorites` is a complex extension also generated from `extensions.prototxt`
 
@@ -154,5 +154,5 @@ marital_status {
 ```
 This means instead of having to iterate through all the codings to find the v3 code, you can just call `patient.marital_status().v3()`
 ## Example 4: Validate Patients
-This one, [validate_patients.cc](https://github.com/google/fhir-examples/blob/master/cc/validate_patients.cc), is a relatively straight-forward example for demonstrating the ValidateResource api.
+This one, [validate_patients.cc](cc/google/fhir_examples/validate_patients.cc), is a relatively straight-forward example for demonstrating the ValidateResource api.
 ##
