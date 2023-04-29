@@ -4,7 +4,7 @@ This is a guide to the __FhirProto Examples__ in this repository.  For instructi
 
 ## C++
 ### Example 1: Parsing and Printing
-The first example is found in [parse_patients.cc](https://github.com/google/fhir-examples/blob/master/cc/parse_patients.cc).  This shows how to parse FhirProtos from an NDJSON file containing FHIR JSON records.  It parses the 1000 patients in the synthea workspace.  It then prints out the first one to proto text, and shows simple manipulation by printing some information about the patient.
+The first example is found in [parse_patients.cc](cc/google/fhir_examples/parse_patients.cc).  This shows how to parse FhirProtos from an NDJSON file containing FHIR JSON records.  It parses the 1000 patients in the synthea workspace.  It then prints out the first one to proto text, and shows simple manipulation by printing some information about the patient.
 
 To run:
 ```
@@ -14,7 +14,7 @@ bazel-bin/cc/ParsePatient $WORKSPACE
 Finally, you can uncomment the final lines in this file in order to see how printing a FhirProto to FHIR JSON works.
 
 ### Example 2: Profiling to US Core Patient Profile
-In Example Two, [profile_patients_to_uscore.cc](https://github.com/google/fhir-examples/blob/master/cc/profile_patients_to_uscore.cc), we add an additional step after parsing: we covert the Patient protos from Core FHIR Patient protos into [protos generated from the US Core profiles](https://github.com/google/fhir/blob/master/proto/r4/uscore.proto).  This will automatically detect extensions defined by the [US Core Profile definitions](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-patient.html), and convert them in to [strongly-typed fields](https://github.com/google/fhir/blob/master/proto/r4/uscore.proto#L4612) on the UsCore Patient Proto.
+In Example Two, [profile_patients_to_uscore.cc](cc/google/fhir_examples/profile_patients_to_uscore.cc), we add an additional step after parsing: we covert the Patient protos from Core FHIR Patient protos into [protos generated from the US Core profiles](https://github.com/google/fhir/blob/master/proto/google/fhir/proto/r4/uscore.proto).  This will automatically detect extensions defined by the [US Core Profile definitions](https://www.hl7.org/fhir/us/core/StructureDefinition-us-core-patient.html), and convert them in to [strongly-typed fields](https://github.com/google/fhir/blob/5b7d69b12652a7f6c57f0af6a44b20e807d40b64/proto/google/fhir/proto/r4/uscore.proto#L4612) on the UsCore Patient Proto.
 
 To run:
 ```
